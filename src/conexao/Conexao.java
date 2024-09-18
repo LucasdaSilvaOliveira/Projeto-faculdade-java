@@ -12,7 +12,6 @@ public class Conexao {
         try {
             if(conn == null) {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                // conn = DriverManager.getConnection("jdbc:sqlserver://servername=DESKTOP-H156HPH\\SQLEXPRESS/JavaProject;encrypt=true;integratedSecurity=true;authenticationScheme=JavaKerberos");
                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaproject", "root", "root");
                 System.out.println("Conexão estabelecida com sucesso!");
                 return conn;
