@@ -3,6 +3,12 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee10.servlet.ServletHolder;
+import org.eclipse.jetty.server.Server;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.servlet.ServletContainer;
+
 import entity.Aluno;
 import repository.AlunoRepository;
 
@@ -10,14 +16,34 @@ import repository.AlunoRepository;
  * Hello world!
  */
 public class App {
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+    public static void main(String[] args) throws Exception {
+        // System.out.println("Hello World!");
 
-        Aluno aluno = new Aluno();
-        aluno.setNome("Lucas da Silva");
-        aluno.setIdade(26);
-        aluno.setDiaPagamento(10);
+        // Aluno aluno = new Aluno();
+        // aluno.setNome("Agata Andrade");
+        // aluno.setIdade(28);
+        // aluno.setDiaPagamento(8);
 
-        new AlunoRepository().CadastrarAluno(aluno);
+        // new AlunoRepository().CadastrarAluno(aluno);
+
+        //==============================================
+
+         // Cria um servidor Jetty rodando na porta 8080
+        Server server = new Server(8080);
+
+        // Configura o ServletContextHandler para gerenciar os servlets
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
+
+        // Configura Jersey como servlet
+        ResourceConfig config = new ResourceConfig();
+        config.packages("controllers"); // Pacote onde estão suas rotas
+        ServletContainer servletContainer = new ServletContainer(config);
+        context.addServlet(new ServletHolder(servletContainer), "/api/*");
+
+        // Inicia o servidor
+        server.start();
+        server.join();
     }
 }
