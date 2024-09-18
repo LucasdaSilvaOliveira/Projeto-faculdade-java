@@ -12,7 +12,6 @@ public class AlunoRepository {
         String sql = "INSERT INTO Alunos (Nome, Idade, DiaPagamento) VALUES (? ,? ,?)";
 
         PreparedStatement ps = null;
-
         
         try {
             ps = Conexao.GetConnection().prepareStatement(sql);
