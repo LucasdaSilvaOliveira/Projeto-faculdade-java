@@ -25,10 +25,10 @@ public class AlunoRepository {
 
             while (rs.next()) {
                 Aluno aluno = new Aluno();
-                aluno.setId(rs.getInt("Id"));
-                aluno.setNome(rs.getString("Nome"));
-                aluno.setIdade(rs.getInt("Idade"));
-                aluno.setDiaPagamento(rs.getInt("DiaPagamento"));
+                aluno.setId(rs.getInt("id"));
+                aluno.setNome(rs.getString("nome"));
+                aluno.setIdade(rs.getInt("idade"));
+                aluno.setDiaPagamento(rs.getInt("diaPagamento"));
                 
                 alunos.add(aluno);
             }
@@ -53,9 +53,9 @@ public class AlunoRepository {
             rs.next();
 
             aluno.setId(id);
-            aluno.setNome(rs.getString("Nome"));
-            aluno.setIdade(rs.getInt("Idade"));
-            aluno.setDiaPagamento(rs.getInt("DiaPagamento"));
+            aluno.setNome(rs.getString("nome"));
+            aluno.setIdade(rs.getInt("idade"));
+            aluno.setDiaPagamento(rs.getInt("diaPagamento"));
 
             return aluno;
         } catch (SQLException ex) {
@@ -65,7 +65,7 @@ public class AlunoRepository {
     }
     
     public void CadastrarAluno(Aluno aluno) {
-        String sql = "INSERT INTO Alunos (Nome, Idade, DiaPagamento) VALUES (? ,? ,?)";
+        String sql = "INSERT INTO Alunos (nome, idade, diaPagamento) VALUES (? ,? ,?)";
 
         PreparedStatement ps = null;
         
@@ -84,7 +84,7 @@ public class AlunoRepository {
     }
 
     public boolean AtualizarAluno(int id, Aluno aluno) throws SQLException {
-        String sql = "UPDATE Alunos SET Nome = ?, Idade = ?, DiaPagamento = ? WHERE Id = ?";
+        String sql = "UPDATE Alunos SET nome = ?, idade = ?, diaPagamento = ? WHERE Id = ?";
 
         PreparedStatement ps = null;
 
@@ -97,5 +97,20 @@ public class AlunoRepository {
 
         int linhasAfetadas = ps.executeUpdate();
         return linhasAfetadas > 0; 
+    }
+
+    public boolean deletarAlunoPorId(int id) {
+        String sql = "DELETE FROM Alunos WHERE Id = ?";
+        PreparedStatement ps = null;
+        try {
+            ps = Conexao.GetConnection().prepareStatement(sql);
+            ps.setInt(1, id);
+            int affectedRows = ps.executeUpdate();
+            
+            return affectedRows > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 }

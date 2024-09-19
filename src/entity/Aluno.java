@@ -1,43 +1,58 @@
 package entity;
 
+
+
+import jakarta.json.bind.annotation.JsonbProperty;
+
+import org.glassfish.jersey.server.JSONP;
+
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
+import jakarta.persistence.Column;
+
 public class Aluno {
-    public int Id;
 
-    public String Nome;
+    // @Column(name = "Id")
+    public int id;
 
-    public int Idade;
+    // @Column(name = "Nome")
+    public String nome;
 
-    public int DiaPagamento;
+    // @Column(name = "Idade")
+    public int idade;
+
+    // @Column(name = "diaPagamento")
+    public int diaPagamento;
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 
     public int getIdade() {
-        return Idade;
+        return idade;
     }
 
     public void setIdade(int idade) {
-        Idade = idade;
+        this.idade = idade;
     }
 
     public int getDiaPagamento() {
-        return DiaPagamento;
+        return diaPagamento;
     }
 
     public void setDiaPagamento(int diaPagamento) {
-        DiaPagamento = diaPagamento;
+        this.diaPagamento = diaPagamento;
     }
 }
