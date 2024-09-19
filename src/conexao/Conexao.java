@@ -16,7 +16,6 @@ public class Conexao {
                 System.out.println("Conexão estabelecida com sucesso!");
                 return conn;
             } else {
-                System.out.println("Caiu no else dentro do Try.");
                 return conn;
             }
         } catch (ClassNotFoundException e) {

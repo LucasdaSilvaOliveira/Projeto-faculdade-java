@@ -1,51 +1,29 @@
 package controllers;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import conexao.Conexao;
-import entity.Aluno;
-import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import repository.AlunoRepository;
 
 @Path("/alunos")
 public class AlunoController {
 
     @GET
-    @Path("/BuscarAlunos")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Aluno> BuscarAlunos() {
+    public Response BuscarAlunos() {
 
-        List<Aluno> alunos = new ArrayList<>();
-        String sql = "SELECT * FROM Alunos";
-        
-        try (Connection conn = Conexao.GetConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        // return new AlunoRepository().ObterAlunos();
+        return Response.ok(new AlunoRepository().ObterAlunos()).build();
+    }
 
-            while (rs.next()) {
-                Aluno aluno = new Aluno();
-                aluno.setId(rs.getInt("Id"));
-                aluno.setNome(rs.getString("Nome"));
-                aluno.setIdade(rs.getInt("Idade"));
-                aluno.setDiaPagamento(rs.getInt("DiaPagamento"));
-                
-                alunos.add(aluno);
-            }
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        
-        return alunos;
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response BuscarAluno(@PathParam("id") int id) {
+        return Response.ok(new AlunoRepository().ObterAlunoPorId(id)).build();
     }
 }
