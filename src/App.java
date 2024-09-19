@@ -1,20 +1,9 @@
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
 import org.eclipse.jetty.ee10.servlet.ServletHolder;
 import org.eclipse.jetty.server.Server;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-import entity.Aluno;
-import repository.AlunoRepository;
-
-/**
- * Hello world!
- */
 public class App {
     public static void main(String[] args) throws Exception {
 

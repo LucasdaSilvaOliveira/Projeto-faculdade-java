@@ -1,7 +1,6 @@
 package controllers;
 
 import java.sql.SQLException;
-
 import entity.Aluno;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
