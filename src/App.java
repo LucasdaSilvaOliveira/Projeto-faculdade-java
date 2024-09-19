@@ -25,7 +25,7 @@ public class App {
         server.setHandler(context);
 
         ResourceConfig config = new ResourceConfig();
-        config.packages("controllers"); // Pacote onde estão suas rotas
+        config.packages("controllers");
         ServletContainer servletContainer = new ServletContainer(config);
         context.addServlet(new ServletHolder(servletContainer), "/api/*");
 
