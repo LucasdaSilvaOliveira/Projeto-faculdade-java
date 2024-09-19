@@ -82,4 +82,20 @@ public class AlunoRepository {
             ex.printStackTrace();
         }
     }
+
+    public boolean AtualizarAluno(int id, Aluno aluno) throws SQLException {
+        String sql = "UPDATE Alunos SET Nome = ?, Idade = ?, DiaPagamento = ? WHERE Id = ?";
+
+        PreparedStatement ps = null;
+
+        ps = Conexao.GetConnection().prepareStatement(sql);
+        
+        ps.setString(1, aluno.getNome());
+        ps.setInt(2, aluno.getIdade());
+        ps.setInt(3, aluno.getDiaPagamento());
+        ps.setInt(4, id);
+
+        int linhasAfetadas = ps.executeUpdate();
+        return linhasAfetadas > 0; 
+    }
 }
